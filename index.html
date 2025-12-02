@@ -6,47 +6,70 @@
   <style>
     body {
       font-family: "Trebuchet MS", Arial, sans-serif;
-      text-align: center;
-      background: #fdf6e3;
+      background: linear-gradient(135deg, #fff8e7, #fceabb);
       margin: 0;
-      padding: 50px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 500px;
     }
     h1 {
       color: #b5651d;
-      font-size: 2.5em;
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      margin-bottom: 25px;
     }
     button {
-      background-color: #f4a460;
+      background: linear-gradient(135deg, #f4a460, #e9967a);
       border: none;
-      border-radius: 8px;
-      padding: 15px 30px;
+      border-radius: 10px;
+      padding: 15px 35px;
       font-size: 18px;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.3s;
+      color: #fff;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
     button:hover {
-      background-color: #e9967a;
       transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
     #spruch {
-      margin-top: 40px;
+      margin-top: 30px;
       font-size: 22px;
       font-weight: bold;
       color: #333;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
       min-height: 40px;
     }
     img {
-      margin-top: 30px;
-      width: 200px;
+      margin-top: 25px;
+      width: 120px;
+      opacity: 0.9;
     }
   </style>
 </head>
 <body>
-  <h1>🥠 Dein digitaler Glückskeks</h1>
-  <p>Klicke auf den Button und erhalte deine KI-Weisheit!</p>
-  <button onclick="zeigeSpruch()">Glückskeks öffnen</button>
-  <div id="spruch"></div>
-  <img src="keks.png" alt="Glückskeks">
+  <div class="container">
+    <h1>🥠 Dein digitaler Glückskeks</h1>
+    <p>Klicke auf den Button und erhalte deine KI-Weisheit!</p>
+    <button onclick="zeigeSpruch()">Glückskeks öffnen</button>
+    <div id="spruch"></div>
+    <img src="keks.png" alt="Glückskeks">
+  </div>
 
   <script>
     const sprueche = [
@@ -54,12 +77,20 @@
       "KI denkt nicht für dich – aber mit dir.",
       "Die Zukunft ist schon da – sie hat WLAN.",
       "Wenn du Daten fütterst, vergiss die Pausen nicht.",
-      "Manchmal ist die beste KI die Pause-Taste."
+      "Manchmal ist die beste KI die Pause-Taste.",
+      "Ein kleiner Prompt kann große Ideen wecken.",
+      "Heute wird dich ein Bug klüger machen.",
+      "Deine Daten tanzen heute im Takt der Inspiration."
     ];
 
     function zeigeSpruch() {
       const zufall = Math.floor(Math.random() * sprueche.length);
-      document.getElementById("spruch").innerText = sprueche[zufall];
+      const spruchDiv = document.getElementById("spruch");
+      spruchDiv.style.opacity = 0; // reset
+      setTimeout(() => {
+        spruchDiv.innerText = sprueche[zufall];
+        spruchDiv.style.opacity = 1; // fade-in
+      }, 200);
     }
   </script>
 </body>
