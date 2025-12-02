@@ -10,9 +10,15 @@
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;   /* Banner oben, Box darunter */
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+    }
+    .banner img {
+      width: 100%;              /* Bild über gesamte Breite */
+      max-height: 200px;        /* Höhe begrenzen, damit es nicht zu groß wird */
+      object-fit: cover;        /* Bild füllt den Bereich proportional */
+      display: block;
     }
     .container {
       background: #ffffff;
@@ -21,6 +27,7 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       text-align: center;
       max-width: 500px;
+      margin-top: 20px; /* Abstand zum Banner */
       position: relative;
     }
     h1 {
@@ -42,8 +49,8 @@
       color: #fff;
       font-weight: bold;
       transition: transform 0.2s, box-shadow 0.2s;
-      display: block;          /* sorgt für Untereinander */
-      margin: 20px auto;       /* zentriert horizontal */
+      display: block;
+      margin: 20px auto;
     }
     button:hover {
       transform: scale(1.05);
@@ -54,7 +61,7 @@
       bottom: -70px;
       left: 50%;
       transform: translateX(-50%) translateY(100%);
-      background: #fdf6e3; /* Papierfarbe */
+      background: #fdf6e3;
       border: 2px solid #b5651d;
       border-radius: 5px;
       padding: 10px 25px;
@@ -72,21 +79,27 @@
       0% { transform: translateX(-50%) translateY(100%); opacity: 0; }
       100% { transform: translateX(-50%) translateY(0); opacity: 1; }
     }
-    img {
-      display: block;          /* untereinander */
-      margin: 20px auto;       /* zentriert */
-      width: 250px;            /* größere Darstellung */
+    img.keks {
+      display: block;
+      margin: 20px auto;
+      width: 250px;
       opacity: 0.95;
     }
   </style>
 </head>
 <body>
+  <!-- Banner mit PNG -->
+  <div class="banner">
+    <img src="Logo.png" alt="Banner">
+  </div>
+
+  <!-- Box darunter -->
   <div class="container">
     <h1>🥠 Dein digitaler Glückskeks</h1>
     <p>Klicke auf den Button und erhalte deine KI-Weisheit!</p>
     <button id="keksButton" onclick="zeigeSpruch()">Glückskeks öffnen</button>
     <div id="spruch"></div>
-    <img src="WG.jpg" alt="Glückskeks">
+    <img src="WG.jpg" alt="Glückskeks" class="keks">
   </div>
 
   <script>
