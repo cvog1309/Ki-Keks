@@ -10,34 +10,35 @@
       margin: 0;
       padding: 0;
       display: flex;
-      flex-direction: column;   /* Banner oben, Box darunter */
-      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
       min-height: 100vh;
     }
+    .wrapper {
+      max-width: 500px; /* gemeinsame Breite für Banner + Box */
+      width: 100%;
+    }
     .banner img {
-      width: 100%;              /* Bild über gesamte Breite */
-      max-height: 200px;        /* Höhe begrenzen, damit es nicht zu groß wird */
-      object-fit: cover;        /* Bild füllt den Bereich proportional */
+      width: 100%;              /* Banner so breit wie Box */
       display: block;
+      border-radius: 15px 15px 0 0; /* gleiche Rundung oben */
     }
     .container {
       background: #ffffff;
-      padding: 40px;
-      border-radius: 15px;
+      padding: 30px;
+      border-radius: 0 0 15px 15px; /* unten abgerundet */
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       text-align: center;
-      max-width: 500px;
-      margin-top: 20px; /* Abstand zum Banner */
       position: relative;
     }
     h1 {
       color: #b5651d;
-      font-size: 2.2em;
+      font-size: 2em;
       margin-bottom: 10px;
     }
     p {
       color: #555;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
     button {
       background: linear-gradient(135deg, #f4a460, #e9967a);
@@ -57,10 +58,7 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
     #spruch {
-      position: absolute;
-      bottom: -70px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100%);
+      margin: 20px auto;
       background: #fdf6e3;
       border: 2px solid #b5651d;
       border-radius: 5px;
@@ -68,38 +66,34 @@
       font-size: 18px;
       font-weight: bold;
       color: #333;
-      white-space: nowrap;
-      opacity: 0;
       box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
-    }
-    #spruch.show {
-      animation: fortuneSlide 1s forwards;
-    }
-    @keyframes fortuneSlide {
-      0% { transform: translateX(-50%) translateY(100%); opacity: 0; }
-      100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      display: none; /* unsichtbar bis Button geklickt */
     }
     img.keks {
       display: block;
       margin: 20px auto;
-      width: 250px;
+      width: 100%;   /* Bild füllt die Box */
+      max-height: 250px;
+      object-fit: contain;
       opacity: 0.95;
     }
   </style>
 </head>
 <body>
-  <!-- Banner mit PNG -->
-  <div class="banner">
-    <img src="Logo.png" alt="Banner">
-  </div>
+  <div class="wrapper">
+    <!-- Banner mit PNG -->
+    <div class="banner">
+      <img src="banner.png" alt="Banner">
+    </div>
 
-  <!-- Box darunter -->
-  <div class="container">
-    <h1>🥠 Dein digitaler Glückskeks</h1>
-    <p>Klicke auf den Button und erhalte deine KI-Weisheit!</p>
-    <button id="keksButton" onclick="zeigeSpruch()">Glückskeks öffnen</button>
-    <div id="spruch"></div>
-    <img src="WG.jpg" alt="Glückskeks" class="keks">
+    <!-- Box darunter -->
+    <div class="container">
+      <h1>🥠 Dein digitaler Glückskeks</h1>
+      <p>Klicke auf den Button und erhalte deine KI-Weisheit!</p>
+      <button id="keksButton" onclick="zeigeSpruch()">Glückskeks öffnen</button>
+      <div id="spruch"></div>
+      <img src="WG.jpg" alt="Glückskeks" class="keks">
+    </div>
   </div>
 
   <script>
@@ -112,13 +106,37 @@
       "Ein kleiner Prompt kann große Ideen wecken.",
       "Heute wird dich ein Bug klüger machen.",
       "Deine Daten tanzen heute im Takt der Inspiration."
+      "Dein nächster Algorithmus hat schon Kaffee getrunken."
+      "KI weiß viel – aber nicht, wo dein USB-Stick liegt."
+      "Wenn die KI mal hängt: einfach Neustart und Schokolade."
+      "Dein Datensatz tanzt heute Cha-Cha-Cha."
+      "Die Cloud ist nur ein anderer Computer – mit besserem Wetter."
+      "KI ist kein Ersatz – sondern ein Werkzeug für deine Kreativität."
+      "Jede gute Frage bringt dich weiter als jede schnelle Antwort."
+      "Deine nächste Unterrichtsidee wird digital glänzen."
+      "Technik ist nur so stark wie die Menschen, die sie nutzen."
+      "Du bist die Schnittstelle zwischen Lernen und Zukunft."
+      "KI kann viel – aber Verantwortung bleibt menschlich."
+      "Nicht jeder Datensatz erzählt die ganze Geschichte."
+      "Transparenz ist die beste KI-Schnittstelle."
+      "KI ist nur klug, wenn wir klug mit ihr umgehen."
+      "Dein nächster Algorithmus bringt dir mehr Freude als ein doppelter Espresso."
+      "Heute wird dich ein Bug überraschen – aber nur, um dich klüger zu machen."
+      "Die KI sieht deine Zukunft… und sie hat WLAN."
+      "Ein unerwartetes Update wird dir Glück bringen."
+      "Deine Daten tanzen heute im Takt der Inspiration."
+      "Die Cloud schenkt dir morgen eine sonnige Idee."
+      "Ein kleiner Prompt wird dir große Erkenntnis bringen."
+      "Dein nächster Klick öffnet mehr Türen als du denkst."
+      "Die KI flüstert: Geduld ist der beste Algorithmus."
+      "Heute wirst du mehr lernen als deine Festplatte speichern kann."
     ];
 
     function zeigeSpruch() {
       const zufall = Math.floor(Math.random() * sprueche.length);
       const spruchDiv = document.getElementById("spruch");
       spruchDiv.innerText = sprueche[zufall];
-      spruchDiv.classList.add("show");
+      spruchDiv.style.display = "block"; // Spruch sichtbar machen
 
       // Button nach Klick ausblenden
       document.getElementById("keksButton").style.display = "none";
